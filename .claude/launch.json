@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "paper-notes",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-ExecutionPolicy", "Bypass",
+        "-File", "C:\\Users\\jhjin\\OneDrive - 연세대학교\\paper\\serve.ps1",
+        "-Port", "8080"
+      ],
+      "port": 8080
+    }
+  ]
+}
