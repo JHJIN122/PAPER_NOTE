@@ -203,11 +203,9 @@ tbody tr.quote-row:hover { background: rgba(255,255,255,0.04); }
 .quote-list-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
 .quote-list-item:last-child { border-bottom: none; }
 
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll table { min-width: 640px; }
+
 @media (max-width: 640px) {
   .quote-cell { max-width: 160px; }
-  table, thead, tbody, th, td, tr { display: block; }
-  thead { display: none; }
-  tbody tr.quote-row { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; padding: 8px 0; }
-  tbody td { border-bottom: none; padding: 4px 12px; }
-  tbody td::before { content: attr(data-label); display: block; font-size: 11px; color: var(--text-muted); }
 }

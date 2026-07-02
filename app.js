@@ -295,10 +295,10 @@ function renderQuoteList() {
     ${filterChips.length ? `<div class="chips-row">${filterChips.map(c => `<span class="chip filter-chip">${esc(c.label)} <button type="button" data-clear-filter="${c.key}">×</button></span>`).join('')}</div>` : ''}
     ${rows.length === 0
       ? `<div class="empty-state">${state.allQuotes.length === 0 ? '아직 저장된 인용문이 없습니다. 논문을 추가하고 인용문을 등록해보세요.' : '조건에 맞는 인용문이 없습니다.'}</div>`
-      : `<table>
+      : `<div class="table-scroll"><table>
           <thead><tr>${cols.map(c => `<th class="${SORTABLE_KEYS.has(c.key) ? 'sortable' : ''}" data-sort="${c.key}">${esc(c.label)}${sortArrow(c.key)}</th>`).join('')}</tr></thead>
           <tbody>${rows.map(q => renderQuoteRow(q, cols)).join('')}</tbody>
-        </table>`}
+        </table></div>`}
   `;
   bindHeader();
   bindQuoteListEvents();
@@ -593,7 +593,7 @@ function renderPapersList() {
     ${headerHtml()}
     <h2 class="section-heading">논문 목록</h2>
     ${state.papers.length === 0 ? `<div class="empty-state">아직 추가된 논문이 없습니다.</div>` : `
-    <table>
+    <div class="table-scroll"><table>
       <thead><tr><th>제목</th><th>저자</th><th>저널/학회</th><th>발행연도</th></tr></thead>
       <tbody>
         ${state.papers.map(p => `
@@ -605,7 +605,7 @@ function renderPapersList() {
           </tr>
         `).join('')}
       </tbody>
-    </table>
+    </table></div>
     `}
   `;
   bindHeader();
