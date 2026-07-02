@@ -21,7 +21,7 @@ body {
 }
 
 #app {
-  max-width: 1080px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 24px 20px 60px;
 }
@@ -142,7 +142,10 @@ tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-
 tbody tr:last-child td { border-bottom: none; }
 tbody tr.quote-row { cursor: pointer; }
 tbody tr.quote-row:hover { background: rgba(255,255,255,0.04); }
-.quote-cell { max-width: 380px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cell-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quote-cell { max-width: 460px; }
+.title-cell { max-width: 300px; }
+.authors-cell { max-width: 240px; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 4px; }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
 
@@ -202,6 +205,7 @@ tbody tr.quote-row:hover { background: rgba(255,255,255,0.04); }
 
 .quote-list-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
 .quote-list-item:last-child { border-bottom: none; }
+.quote-line { font-size: 14px; margin: 4px 0; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .table-scroll table { min-width: 640px; }

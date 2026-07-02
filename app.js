@@ -245,11 +245,11 @@ function renderQuoteRow(q, cols) {
   const cellFor = (key) => {
     switch (key) {
       case 'quote_text':
-        return `<td data-label="인용문" class="quote-cell">${esc(truncate(q.quote_text, 80))}</td>`;
+        return `<td data-label="인용문" class="cell-truncate quote-cell">${esc(truncate(q.quote_text, 120))}</td>`;
       case 'title':
-        return `<td data-label="논문 제목"><a href="#/papers/${p.id}" class="paper-title-link">${esc(p.title || '(제목 없음)')}</a></td>`;
+        return `<td data-label="논문 제목" class="cell-truncate title-cell"><a href="#/papers/${p.id}" class="paper-title-link">${esc(p.title || '(제목 없음)')}</a></td>`;
       case 'authors':
-        return `<td data-label="저자">${(p.authors || []).map(a => `<span class="chip author-chip" data-author="${esc(a)}">${esc(a)}</span>`).join(' ') || '-'}</td>`;
+        return `<td data-label="저자" class="cell-truncate authors-cell">${(p.authors || []).map(a => `<span class="chip author-chip" data-author="${esc(a)}">${esc(a)}</span>`).join(' ') || '-'}</td>`;
       case 'year':
         return `<td data-label="발행연도">${p.year ?? '-'}</td>`;
       case 'project':
@@ -598,9 +598,9 @@ function renderPapersList() {
       <tbody>
         ${state.papers.map(p => `
           <tr class="quote-row" data-paper-id="${p.id}">
-            <td data-label="제목"><a href="#/papers/${p.id}" class="paper-title-link">${esc(p.title)}</a></td>
-            <td data-label="저자">${(p.authors || []).join(', ') || '-'}</td>
-            <td data-label="저널/학회">${esc(p.venue || '-')}</td>
+            <td data-label="제목" class="cell-truncate title-cell"><a href="#/papers/${p.id}" class="paper-title-link">${esc(p.title)}</a></td>
+            <td data-label="저자" class="cell-truncate authors-cell">${(p.authors || []).join(', ') || '-'}</td>
+            <td data-label="저널/학회" class="cell-truncate title-cell">${esc(p.venue || '-')}</td>
             <td data-label="발행연도">${p.year ?? '-'}</td>
           </tr>
         `).join('')}
@@ -645,7 +645,7 @@ function renderPaperDetail(paperId) {
       <button id="add-quote-here-btn" class="btn-primary" type="button" style="margin-bottom:12px;">+ 이 논문에 인용문 추가</button>
       ${quotes.length === 0 ? `<div class="empty-state">아직 인용문이 없습니다.</div>` : quotes.map(q => `
         <div class="quote-list-item">
-          <div class="quote-full" style="font-size:14px; margin:4px 0; cursor:pointer;" data-quote-id="${q.id}">${esc(q.quote_text)}</div>
+          <div class="quote-line" data-quote-id="${q.id}">${esc(q.quote_text)}</div>
           <div class="tag-list">
             ${(q.purpose || []).map(x => `<span class="chip">${esc(x)}</span>`).join('')}
             ${(q.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
