@@ -11,6 +11,7 @@ create table if not exists papers (
   venue text,
   year int,
   project text,
+  tags text[] not null default '{}',
   source_url text,
   notes text,
   created_at timestamptz not null default now()
@@ -30,6 +31,7 @@ create table if not exists quotes (
 create index if not exists papers_user_id_idx on papers(user_id);
 create index if not exists papers_title_idx on papers using gin (to_tsvector('simple', title));
 create index if not exists papers_authors_idx on papers using gin (authors);
+create index if not exists papers_tags_idx on papers using gin (tags);
 create index if not exists quotes_user_id_idx on quotes(user_id);
 create index if not exists quotes_paper_id_idx on quotes(paper_id);
 create index if not exists quotes_tags_idx on quotes using gin (tags);

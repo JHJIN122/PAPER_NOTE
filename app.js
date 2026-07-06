@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=4';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=5';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -554,6 +554,7 @@ function renderPaperForm(paperId) {
         <div class="field"><label>저널/학회</label><input type="text" id="paper-venue" value="${esc(paper?.venue || '')}"></div>
         <div class="field"><label>발행연도</label><input type="number" id="paper-year" value="${paper?.year ?? ''}"></div>
         <div class="field"><label>프로젝트명</label><input type="text" id="paper-project" value="${esc(paper?.project || '')}"></div>
+        <div class="field"><label>태그 (쉼표로 구분)</label><input type="text" id="paper-tags" placeholder="예: qualitative, chatbot" value="${esc((paper?.tags || []).join(', '))}"></div>
         <div class="field"><label>출처 URL</label><input type="url" id="paper-url" value="${esc(paper?.source_url || '')}"></div>
         <div class="field"><label>메모</label><textarea id="paper-notes">${esc(paper?.notes || '')}</textarea></div>
         <div class="error-msg" id="paper-form-error"></div>
@@ -573,6 +574,7 @@ function renderPaperForm(paperId) {
       venue: document.getElementById('paper-venue').value.trim() || null,
       year: document.getElementById('paper-year').value ? parseInt(document.getElementById('paper-year').value, 10) : null,
       project: document.getElementById('paper-project').value.trim() || null,
+      tags: parseCommaList(document.getElementById('paper-tags').value),
       source_url: document.getElementById('paper-url').value.trim() || null,
       notes: document.getElementById('paper-notes').value.trim() || null,
     };
@@ -594,7 +596,7 @@ function renderPapersList() {
     <h2 class="section-heading">논문 목록</h2>
     ${state.papers.length === 0 ? `<div class="empty-state">아직 추가된 논문이 없습니다.</div>` : `
     <div class="table-scroll"><table>
-      <thead><tr><th>제목</th><th>저자</th><th>저널/학회</th><th>발행연도</th></tr></thead>
+      <thead><tr><th>제목</th><th>저자</th><th>저널/학회</th><th>발행연도</th><th>태그</th></tr></thead>
       <tbody>
         ${state.papers.map(p => `
           <tr class="quote-row" data-paper-id="${p.id}">
@@ -602,6 +604,7 @@ function renderPapersList() {
             <td data-label="저자" class="cell-truncate authors-cell">${(p.authors || []).join(', ') || '-'}</td>
             <td data-label="저널/학회" class="cell-truncate title-cell">${esc(p.venue || '-')}</td>
             <td data-label="발행연도">${p.year ?? '-'}</td>
+            <td data-label="태그" class="cell-truncate authors-cell">${(p.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join(' ') || '-'}</td>
           </tr>
         `).join('')}
       </tbody>
