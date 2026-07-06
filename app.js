@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=3';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=4';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -646,9 +646,12 @@ function renderPaperDetail(paperId) {
       ${quotes.length === 0 ? `<div class="empty-state">아직 인용문이 없습니다.</div>` : quotes.map(q => `
         <div class="quote-list-item">
           <div class="quote-line" data-quote-id="${q.id}">${esc(q.quote_text)}</div>
-          <div class="tag-list">
-            ${(q.purpose || []).map(x => `<span class="chip">${esc(x)}</span>`).join('')}
-            ${(q.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
+          <div class="quote-meta-row">
+            <div class="tag-list">
+              ${(q.purpose || []).map(x => `<span class="chip">${esc(x)}</span>`).join('')}
+              ${(q.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
+            </div>
+            ${q.memo ? `<div class="quote-memo-preview">${esc(truncate(q.memo, 100))}</div>` : ''}
           </div>
           <div class="hint">${fmtDate(q.created_at)}</div>
         </div>

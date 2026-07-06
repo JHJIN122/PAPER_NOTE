@@ -206,6 +206,9 @@ tbody tr.quote-row:hover { background: rgba(255,255,255,0.04); }
 .quote-list-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
 .quote-list-item:last-child { border-bottom: none; }
 .quote-line { font-size: 14px; margin: 4px 0; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quote-meta-row { display: flex; align-items: center; gap: 8px; }
+.quote-meta-row .tag-list { flex-shrink: 0; }
+.quote-memo-preview { color: var(--text-muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
 
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .table-scroll table { min-width: 640px; }
