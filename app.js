@@ -1,9 +1,9 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=5';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=6';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const PURPOSE_OPTIONS = ['인용', '영어'];
+const PURPOSE_OPTIONS = ['인용', '영어', '아이디어'];
 
 const COLUMN_DEFS = [
   { key: 'quote_text', label: '인용문', default: true },
