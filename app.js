@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=6';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js?v=7';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -481,7 +481,7 @@ function openQuoteDetailModal(quoteId) {
     <h2>인용문 상세</h2>
     <div class="paper-meta"><a href="#/papers/${p.id}">${esc(p.title || '(제목 없음)')}</a> · ${(p.authors || []).join(', ') || '저자 미상'} ${p.year ? '· ' + p.year : ''} ${p.project ? '· ' + esc(p.project) : ''}</div>
     <div class="quote-full">${esc(q.quote_text)}</div>
-    ${q.memo ? `<div><strong>메모</strong><div>${esc(q.memo)}</div></div>` : ''}
+    ${q.memo ? `<div><strong>메모</strong><div class="memo-text">${esc(q.memo)}</div></div>` : ''}
     <div class="tag-list" style="margin-top:8px;">
       ${(q.purpose || []).map(x => `<span class="chip">${esc(x)}</span>`).join('')}
       ${(q.tags || []).map(t => `<span class="chip">#${esc(t)}</span>`).join('')}
@@ -636,7 +636,7 @@ function renderPaperDetail(paperId) {
       <div class="paper-meta">${(paper.authors || []).join(', ') || '저자 미상'} ${paper.year ? '· ' + paper.year : ''} ${paper.venue ? '· ' + esc(paper.venue) : ''}</div>
       ${paper.project ? `<div class="paper-meta">프로젝트: ${esc(paper.project)}</div>` : ''}
       ${paper.source_url ? `<div class="paper-meta"><a href="${esc(paper.source_url)}" target="_blank" rel="noopener">${esc(paper.source_url)}</a></div>` : ''}
-      ${paper.notes ? `<div class="paper-meta">메모: ${esc(paper.notes)}</div>` : ''}
+      ${paper.notes ? `<div class="paper-meta">메모: <span class="memo-text">${esc(paper.notes)}</span></div>` : ''}
       <div style="display:flex; gap:8px; margin-top:12px;">
         <a href="#/papers/${paperId}/edit" class="btn">논문 정보 수정</a>
         <button id="delete-paper-btn" class="btn btn-danger" type="button">논문 삭제</button>
